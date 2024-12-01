@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatter - Modern Messaging App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen flex items-center justify-center">
+    <div id="username-page" class="w-full max-w-md">
+        <div class="bg-white shadow-2xl rounded-2xl p-8">
+            <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">Welcome to Chatter</h2>
+            <form id="usernameForm" class="space-y-4">
+                <div>
+                    <label for="nickname" class="block text-sm font-medium text-gray-700">Nickname</label>
+                    <input 
+                        type="text" 
+                        id="nickname" 
+                        required 
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+                    >
+                </div>
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullname" 
+                        required 
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+                    >
+                </div>
+                <button 
+                    type="submit" 
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    Enter Chat
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="chat-page" class="hidden w-full max-w-5xl bg-white shadow-2xl rounded-2xl overflow-hidden">
+        <div class="flex h-[750px]">
+            <!-- Users List -->
+            <div class="w-1/4 bg-blue-600 text-white p-6 flex flex-col">
+                <div class="flex-grow overflow-y-auto">
+                    <h2 class="text-2xl font-bold mb-4">Online Users</h2>
+                    <ul id="connectedUsers" class="space-y-2"></ul>
+                </div>
+                <div class="mt-4 border-t border-blue-500 pt-4">
+                    <p id="connected-user-fullname" class="text-lg font-semibold mb-2"></p>
+                    <button 
+                        id="logout" 
+                        class="w-full bg-white/20 text-white py-2 rounded-lg hover:bg-white/30 transition"
+                    >
+                        Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="w-3/4 flex flex-col">
+                <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-3"></div>
+                
+                <form 
+                    id="messageForm" 
+                    class="hidden p-4 bg-gray-100 border-t flex items-center space-x-3"
+                >
+                    <input 
+                        type="text" 
+                        id="message" 
+                        placeholder="Type your message..." 
+                        class="flex-grow p-3 rounded-lg border focus:ring focus:ring-blue-200"
+                    >
+                    <button 
+                        type="submit" 
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
